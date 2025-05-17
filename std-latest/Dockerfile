@@ -31,6 +31,9 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 RUN ln -sf /usr/bin/python3.10 /usr/bin/python && \
     ln -sf /usr/bin/pip3 /usr/bin/pip
 
+# croc
+RUN cd /usr/local/bin && rm -rf my-croc-linux-amd64.tar && wget https://github.com/my-homes/docker-03/blob/raw/docker-data/my-croc-linux-amd64.tar && tar xvf my-croc-linux-amd64.tar && rm -rf my-croc-linux-amd64.tar
+
 # Upgrade pip and install build dependencies
 RUN pip install --upgrade pip
 RUN pip install packaging wheel setuptools ninja
