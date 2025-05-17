@@ -1,0 +1,33 @@
+#! /usr/bin/env bash
+#set -uvx
+set -e
+cwd=`pwd`
+#echo $*
+if [ -z "$MSYSTEM" ]; then
+  dart=dart
+else
+  dart=dart.exe
+fi
+
+while getopts ":s" OPT
+do
+  case $OPT in
+    s) OPT_FLAG_s=1;;
+    \?) echo "[ERROR] Undefined options.";;
+  esac
+done
+shift $(($OPTIND - 1))
+#echo $*
+src_file=`realpath $1`
+#proj_dir=`dt projDir $src_file`
+proj_dir=$(dirname "$src_file")
+cd "$proj_dir"
+if [ -n "${OPT_FLAG_s+UNDEF}" ];then
+  specgen
+else
+  if [ ! -f pubspec.lock ]; then
+    $dart pub get
+  fi
+fi
+cd "$cwd"
+$dart $*

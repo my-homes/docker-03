@@ -1,0 +1,7 @@
+#! /usr/bin/env bash
+set -uvx
+set -e
+cd /FramePack
+pip install -r requirements.txt
+python demo_gradio.py --share
+

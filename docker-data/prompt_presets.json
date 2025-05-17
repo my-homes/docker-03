@@ -1,0 +1,36 @@
+{
+  "presets": [
+    {
+      "name": "A character dances gracefully, with clear movements, full of charm.",
+      "prompt": "A character dances gracefully, with clear movements, full of charm.",
+      "is_default": true
+    },
+    {
+      "name": "A character doing some simple body movements.",
+      "prompt": "A character doing some simple body movements.",
+      "is_default": true,
+      "is_startup_default": true
+    },
+    {
+      "name": "A character moves in unexpected ways, with surprising transitions poses.",
+      "prompt": "A character moves in unexpected ways, with surprising transitions poses.",
+      "is_default": true
+    },
+    {
+      "name": "A character performs dynamic movements with energy and flowing motion.",
+      "prompt": "A character performs dynamic movements with energy and flowing motion.",
+      "is_default": true
+    },
+    {
+      "name": "A character uses expressive hand gestures and body language.",
+      "prompt": "A character uses expressive hand gestures and body language.",
+      "is_default": true
+    },
+    {
+      "name": "A character walks leisurely with relaxed movements.",
+      "prompt": "A character walks leisurely with relaxed movements.",
+      "is_default": true
+    }
+  ],
+  "default_startup_prompt": "A character doing some simple body movements."
+}

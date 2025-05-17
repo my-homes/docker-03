@@ -1,0 +1,9 @@
+#! /usr/bin/env bash
+set -uvx
+set -e
+cd /FramePack
+pip install -r requirements.txt
+head -n -8 demo_gradio.py > prepare.py
+python prepare.py
+python endframe_ichi.py --share
+
