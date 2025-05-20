@@ -47,6 +47,7 @@ RUN pip install xformers==0.0.29.post3 --no-deps --index-url https://download.py
 # For ComfyUI
 RUN pip install aiohttp
 
+# For FramePack
 RUN cd /tmp && rm -rf requirements.txt && wget https://github.com/lllyasviel/FramePack/raw/main/requirements.txt && pip install -r requirements.txt && rm -rf requirements.txt
 
 # ==================================================================
