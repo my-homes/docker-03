@@ -11,6 +11,7 @@ ENV PATH=/root/.pub-cache/bin:$PATH
 # Install system dependencies
 RUN apt-get update && apt-get install -y --no-install-recommends \
     dos2unix \
+    file \
     nano \
     vim \
     git \
