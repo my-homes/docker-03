@@ -1,5 +1,6 @@
 #! /usr/bin/env bash
 set -uvx
 set -e
-docker pull javacommons/paperspace-std:v2025.0521.1647-JST
+cname=javacommons/paperspace-std:v2025.0522.0600-JST
+docker pull $cname
 docker images
