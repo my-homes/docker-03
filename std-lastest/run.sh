@@ -1,4 +1,4 @@
 #! /usr/bin/env bash
 set -uvx
 set -e
-docker run -v `cygpath -w ~/_/docker/docker-data`:/docker-data -it javacommons/paperspace-std:v2025.0522.0540-JST //bin/bash
+docker run -v `cygpath -w ~/_/docker/docker-data`:/docker-data -it javacommons/paperspace-std:v2025.0522.0600-JST //bin/bash
