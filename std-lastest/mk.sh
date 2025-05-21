@@ -2,4 +2,4 @@
 set -uvx
 set -e
 docker builder prune --force
-docker build -t javacommons/paperspace-std:v2025.0521.1647-JST .
+docker build -t javacommons/paperspace-std:v2025.0522.0540-JST .
