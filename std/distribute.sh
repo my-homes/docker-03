@@ -1,8 +1,12 @@
 #! /usr/bin/env bash
 set -uvx
 set -e
-docker commit 0418f059a360 javacommons/pro-drlhi:v2025.0522.0323
-docker commit 0418f059a360 javacommons/pro-kadoma:v2025.0522.0323
-docker commit 0418f059a360 javacommons/pro-jojojojomj:v2025.0522.0323
-docker commit 0418f059a360 javacommons/pro-potsu:v2025.0522.0323
-docker commit 0418f059a360 javacommons/pro-kohmie:v2025.0522.0323
+id=6e5ecf17f252
+version=v2025.0522.1308
+docker commit $id javacommons/pro-tetsu292929:$version
+exit 0
+docker commit $id javacommons/pro-drlhi:$version
+docker commit $id javacommons/pro-kadoma:$version
+docker commit $id javacommons/pro-jojojojomj:$version
+docker commit $id javacommons/pro-potsu:$version
+docker commit $id javacommons/pro-kohmie:$version
