@@ -5,7 +5,6 @@ set -e
 cd / && rm -rf cuda-keyring_*.deb
 
 cd / && cp /docker-data/*.ipynb .
-rm -rf comfyui.ipynb
 
 cd /usr/local/bin && tar xvf /docker-data/fp.tar
 which f0
