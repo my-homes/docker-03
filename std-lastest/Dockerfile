@@ -1,5 +1,6 @@
 # Dockerfile for FramePack-eichi
-FROM nvidia/cuda:12.6.0-devel-ubuntu22.04
+#FROM nvidia/cuda:12.6.0-devel-ubuntu22.04
+FROM nvidia/cuda:12.6.0-devel-ubuntu24.04
 
 # Set environment variables
 ENV LANG C.UTF-8
