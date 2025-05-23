@@ -46,6 +46,7 @@ cd /FramePack && mkdir -p lora
 cd /FramePack/lora && cat /docker-data/bouncing_breasts_hunyuan.safetensors-* > bouncing_breasts_hunyuan.safetensors
 cd /FramePack/lora && cat /docker-data/hagikora_FramePack_oneframe_V3.safetensors-* > hagikora_FramePack_oneframe_V3.safetensors
 cd /FramePack/lora && cat /docker-data/AnimeShots.safetensors-* > AnimeShots.safetensors
+cd /FramePack/lora && cat /docker-data/hyvideo_FastVideo_LoRA-fp8.safetensors-* > hyvideo_FastVideo_LoRA-fp8.safetensors
 cd /
 
 cd / && rm -rf FramePackLoop
