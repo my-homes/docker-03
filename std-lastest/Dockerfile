@@ -40,6 +40,13 @@ RUN cd /usr/local/bin && \
     tar xvf my-croc-linux-amd64.tar && \
     rm -rf my-croc-linux-amd64.tar
 
+# growth-check
+RUN cd /usr/local/bin && \
+    rm -rf growth-check.tar && \
+    wget https://github.com/my-homes/docker-03/raw/main/docker-data/growth-check.tar && \
+    tar xvf growth-check.tar && \
+    rm -rf growth-check.tar
+
 # Microsoft edit
 RUN cd /usr/local/bin && \
     rm -rf edit-1.0.0-x86_64-linux-gnu.xz && \
