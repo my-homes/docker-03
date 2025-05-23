@@ -15,6 +15,8 @@ which oichi
 which loop
 which studio
 which my-dart
+which lic
+which unlic
 
 cd /usr/local/bin && tar xvf /docker-data/my-croc-linux-amd64.tar
 which croc
