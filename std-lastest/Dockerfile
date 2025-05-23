@@ -31,7 +31,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 # Build nano
 RUN cd /root && \
-    apt install -y build-essential libncurses5-dev && \
+    apt-get install -y build-essential libncurses5-dev && \
     rm -rf nano-* && \
     wget https://www.nano-editor.org/dist/latest/nano-8.4.tar.xz && \
     tar -xvf nano-8.4.tar.xz && \
@@ -80,7 +80,7 @@ RUN pip install xformers==0.0.29.post3 --no-deps --index-url https://download.py
 RUN pip install aiohttp
 
 # TimeZone JST (Asia/Tokyo)
-RUN apt update && apt install -y tzdata && ln -sf /usr/share/zoneinfo/Asia/Tokyo /etc/localtime
+RUN apt-get update && apt-get install -y tzdata && ln -sf /usr/share/zoneinfo/Asia/Tokyo /etc/localtime
 
 # For FramePack
 RUN cd /tmp && rm -rf requirements.txt && wget https://github.com/lllyasviel/FramePack/raw/main/requirements.txt && pip install -r requirements.txt && rm -rf requirements.txt
