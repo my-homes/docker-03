@@ -1,6 +1,5 @@
 # Dockerfile for FramePack-eichi
-#FROM nvidia/cuda:12.6.0-devel-ubuntu22.04
-FROM nvidia/cuda:12.6.0-devel-ubuntu24.04
+FROM nvidia/cuda:12.6.0-devel-ubuntu22.04
 
 # Set environment variables
 ENV LANG=C.UTF-8
@@ -9,33 +8,17 @@ ENV DEBIAN_FRONTEND=noninteractive
 ENV PYTHONUNBUFFERED=1
 ENV PATH=/root/.pub-cache/bin:$PATH
 
-# Install python3.10
-RUN apt-get update
-RUN apt-get install -y software-properties-common
-RUN add-apt-repository ppa:deadsnakes/ppa
-RUN apt-get update
-RUN apt-get install -y python3.10
-RUN apt-get install -y libpython3.10-dev
-
-# Install pip3.10
-RUN apt-get install -y --no-install-recommends curl
-RUN curl -sS https://bootstrap.pypa.io/get-pip.py | python3.10
-
-# Create symbolic links for Python
-RUN ln -sf /usr/bin/python3.10 /usr/local/bin/python
-
-# Upgrade pip and install build dependencies
-RUN pip install --upgrade pip
-RUN pip install packaging wheel setuptools ninja
-
 # Install system dependencies
 RUN apt-get update && apt-get install -y --no-install-recommends \
     lshw pciutils \
     dos2unix \
     file \
-    nano \
     vim \
     git \
+    python3.10 \
+    python3.10-dev \
+    python3-pip \
+    python3-venv \
     ffmpeg \
     libsm6 \
     libxext6 \
@@ -45,6 +28,21 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     curl \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
+
+# Build nano
+RUN cd /root && \
+    apt install -y build-essential libncurses5-dev && \
+    rm -rf nano-* && \
+    wget https://www.nano-editor.org/dist/latest/nano-8.4.tar.xz && \
+    tar -xvf nano-8.4.tar.xz && \
+    cd nano-8.4 && \
+    ./configure && \
+    make && \
+    make install
+
+# Create symbolic links for Python
+RUN ln -sf /usr/bin/python3.10 /usr/bin/python && \
+    ln -sf /usr/bin/pip3 /usr/bin/pip
 
 # croc
 RUN cd /usr/local/bin && \
@@ -68,6 +66,10 @@ RUN cd /usr/local/bin && \
     mv edit-1.0.0-x86_64-linux-gnu edit && \
     chmod 755 edit
 
+# Upgrade pip and install build dependencies
+RUN pip install --upgrade pip
+RUN pip install packaging wheel setuptools ninja
+
 # Install PyTorch with CUDA 12.6 support
 RUN pip install torch==2.6.0 torchvision==0.21.0 torchaudio==2.6.0 --index-url https://download.pytorch.org/whl/cu126
 
@@ -78,7 +80,7 @@ RUN pip install xformers==0.0.29.post3 --no-deps --index-url https://download.py
 RUN pip install aiohttp
 
 # TimeZone JST (Asia/Tokyo)
-RUN apt-get update && apt-get install -y tzdata && ln -sf /usr/share/zoneinfo/Asia/Tokyo /etc/localtime
+RUN apt update && apt install -y tzdata && ln -sf /usr/share/zoneinfo/Asia/Tokyo /etc/localtime
 
 # For FramePack
 RUN cd /tmp && rm -rf requirements.txt && wget https://github.com/lllyasviel/FramePack/raw/main/requirements.txt && pip install -r requirements.txt && rm -rf requirements.txt
