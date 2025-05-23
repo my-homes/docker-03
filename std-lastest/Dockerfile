@@ -29,6 +29,10 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
+# Create symbolic links for Python
+RUN ln -sf /usr/bin/python3.10 /usr/bin/python && \
+    ln -sf /usr/bin/pip3 /usr/bin/pip
+
 # Build nano
 RUN apt-get update && \
     apt-get install -y build-essential libncurses5-dev && \
@@ -43,9 +47,15 @@ RUN apt-get update && \
     cd /root && \
     rm -rf nano-*
 
-# Create symbolic links for Python
-RUN ln -sf /usr/bin/python3.10 /usr/bin/python && \
-    ln -sf /usr/bin/pip3 /usr/bin/pip
+# Install dart
+RUN apt update && \
+    apt install -y apt-transport-https && \
+    sh -c 'wget -qO- https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add -' && \
+    sh -c 'wget -qO- https://storage.googleapis.com/download.dartlang.org/linux/debian/dart_stable.list > /etc/apt/sources.list.d/dart_stable.list' &&  \
+    sh -c 'wget -qO- https://storage.googleapis.com/download.dartlang.org/linux/debian/dart_testing.list > /etc/apt/sources.list.d/dart_testing.list' && \
+    sh -c 'wget -qO- https://storage.googleapis.com/download.dartlang.org/linux/debian/dart_unstable.list > /etc/apt/sources.list.d/dart_unstable.list' && \
+    apt update && \
+    apt -t stable install dart
 
 # croc
 RUN cd /usr/local/bin && \
