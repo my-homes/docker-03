@@ -17,17 +17,12 @@ RUN apt-get update
 RUN apt-get install -y python3.10
 RUN apt-get install -y libpython3.10-dev
 
+# Install pip3.10
 RUN apt-get install -y --no-install-recommends curl
 RUN curl -sS https://bootstrap.pypa.io/get-pip.py | python3.10
-#RUN find / -type f -name "python3.10" && sleep 3600
-#RUN find / -type f -name "pip3*" && sleep 3600
 
 # Create symbolic links for Python
-#RUN ln -sf /usr/bin/python3.10 /usr/bin/python && \
-#    ln -sf /usr/bin/pip3 /usr/bin/pip
-RUN ls -ld /usr/local/bin/pip* && sleep 10
-RUN ln -sf /usr/bin/python3.10 /usr/bin/python && \
-    ln -sf /usr/local/bin/pip3.10 /usr/bin/pip
+RUN ln -sf /usr/bin/python3.10 /usr/local/bin/python
 
 # Upgrade pip and install build dependencies
 RUN pip install --upgrade pip
@@ -83,7 +78,7 @@ RUN pip install xformers==0.0.29.post3 --no-deps --index-url https://download.py
 RUN pip install aiohttp
 
 # TimeZone JST (Asia/Tokyo)
-RUN apt update && apt install -y tzdata && ln -sf /usr/share/zoneinfo/Asia/Tokyo /etc/localtime
+RUN apt-get update && apt-get install -y tzdata && ln -sf /usr/share/zoneinfo/Asia/Tokyo /etc/localtime
 
 # For FramePack
 RUN cd /tmp && rm -rf requirements.txt && wget https://github.com/lllyasviel/FramePack/raw/main/requirements.txt && pip install -r requirements.txt && rm -rf requirements.txt
