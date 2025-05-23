@@ -3,11 +3,35 @@
 FROM nvidia/cuda:12.6.0-devel-ubuntu24.04
 
 # Set environment variables
-ENV LANG C.UTF-8
+ENV LANG=C.UTF-8
 ENV SHELL=/bin/bash
 ENV DEBIAN_FRONTEND=noninteractive
 ENV PYTHONUNBUFFERED=1
 ENV PATH=/root/.pub-cache/bin:$PATH
+
+# Install python3.10
+RUN apt-get update
+RUN apt-get install -y software-properties-common
+RUN add-apt-repository ppa:deadsnakes/ppa
+RUN apt-get update
+RUN apt-get install -y python3.10
+RUN apt-get install -y libpython3.10-dev
+
+RUN apt-get install -y --no-install-recommends curl
+RUN curl -sS https://bootstrap.pypa.io/get-pip.py | python3.10
+#RUN find / -type f -name "python3.10" && sleep 3600
+#RUN find / -type f -name "pip3*" && sleep 3600
+
+# Create symbolic links for Python
+#RUN ln -sf /usr/bin/python3.10 /usr/bin/python && \
+#    ln -sf /usr/bin/pip3 /usr/bin/pip
+RUN ls -ld /usr/local/bin/pip* && sleep 10
+RUN ln -sf /usr/bin/python3.10 /usr/bin/python && \
+    ln -sf /usr/local/bin/pip3.10 /usr/bin/pip
+
+# Upgrade pip and install build dependencies
+RUN pip install --upgrade pip
+RUN pip install packaging wheel setuptools ninja
 
 # Install system dependencies
 RUN apt-get update && apt-get install -y --no-install-recommends \
@@ -17,10 +41,6 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     nano \
     vim \
     git \
-    python3.10 \
-    python3.10-dev \
-    python3-pip \
-    python3-venv \
     ffmpeg \
     libsm6 \
     libxext6 \
@@ -30,10 +50,6 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     curl \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
-
-# Create symbolic links for Python
-RUN ln -sf /usr/bin/python3.10 /usr/bin/python && \
-    ln -sf /usr/bin/pip3 /usr/bin/pip
 
 # croc
 RUN cd /usr/local/bin && \
@@ -56,10 +72,6 @@ RUN cd /usr/local/bin && \
     xz -d edit-1.0.0-x86_64-linux-gnu.xz && \
     mv edit-1.0.0-x86_64-linux-gnu edit && \
     chmod 755 edit
-
-# Upgrade pip and install build dependencies
-RUN pip install --upgrade pip
-RUN pip install packaging wheel setuptools ninja
 
 # Install PyTorch with CUDA 12.6 support
 RUN pip install torch==2.6.0 torchvision==0.21.0 torchaudio==2.6.0 --index-url https://download.pytorch.org/whl/cu126
