@@ -1,6 +1,6 @@
 #! /usr/bin/env bash
 set -uvx
 set -e
-cname=javacommons/paperspace-std:v2025.0523.1750-JST
+cname=javacommons/paperspace-std:v2025.0523.1923-JST
 docker builder prune --force
 docker build -t $cname .
