@@ -10,7 +10,7 @@ ENV PATH=/root/.pub-cache/bin:$PATH
 
 # Install system dependencies
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    lshw \
+    lshw pciutils \
     dos2unix \
     file \
     nano \
