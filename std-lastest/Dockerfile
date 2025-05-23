@@ -30,15 +30,18 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && rm -rf /var/lib/apt/lists/*
 
 # Build nano
-RUN cd /root && \
+RUN apt-get update && \
     apt-get install -y build-essential libncurses5-dev && \
+    cd /root && \
     rm -rf nano-* && \
     wget https://www.nano-editor.org/dist/latest/nano-8.4.tar.xz && \
     tar -xvf nano-8.4.tar.xz && \
     cd nano-8.4 && \
     ./configure && \
     make && \
-    make install
+    make install && \
+    cd /root && \
+    rm -rf nano-*
 
 # Create symbolic links for Python
 RUN ln -sf /usr/bin/python3.10 /usr/bin/python && \
