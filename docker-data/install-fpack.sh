@@ -33,7 +33,7 @@ cd /ComfyUI && git log | head > git-log-head.txt
 
 cd / && rm -rf FramePack FramePack-eichi
 cd / && git clone https://github.com/lllyasviel/FramePack
-cd /FramePack && git checkout v1.9.4 && rm -rf .git && pip install -r requirements.txt
+cd /FramePack && rm -rf .git && pip install -r requirements.txt
 cd / && git clone https://github.com/git-ai-code/FramePack-eichi
 cd /FramePack-eichi && cp -r webui/* /FramePack/
 cd / && rm -rf FramePack-eichi
